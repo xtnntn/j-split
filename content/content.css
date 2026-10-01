@@ -1,0 +1,366 @@
+/* J-Split Content Script Styles (Shadow DOM) */
+
+:host {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  color: #1f2937;
+  font-size: 13px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 浮动触发小气泡按钮 */
+.trigger-bubble {
+  position: absolute;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #ffffff;
+  color: #e85a71;
+  padding: 5px 9px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #fed7df;
+  cursor: pointer;
+  user-select: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left top;
+  animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trigger-bubble:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(232, 90, 113, 0.25);
+  background: #fff8f9;
+}
+
+.bubble-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* 翻译主弹窗卡片 */
+.popup-card {
+  position: absolute;
+  z-index: 2147483647;
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  max-height: 520px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f1f3;
+  overflow: hidden;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 头部 */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #fdfafb;
+  border-bottom: 1px solid #f4eff1;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.card-title-icon {
+  font-size: 15px;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 13px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.action-btn:hover {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.action-btn.close:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* 主体滚动区 */
+.card-body {
+  padding: 14px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 滚动条美化 */
+.card-body::-webkit-scrollbar {
+  width: 5px;
+}
+.card-body::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 10px;
+}
+
+/* 原文展示区 */
+.original-box {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border-left: 3px solid #e85a71;
+}
+
+.original-sentence {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  word-break: break-word;
+}
+
+.original-hiragana {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* 整句翻译卡片 */
+.translation-hero {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: #fff7f8;
+  border-radius: 8px;
+  border: 1px solid #fee2e6;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #e85a71;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.translation-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+/* 短语拆解列表 */
+.phrase-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4b5563;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.phrases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phrase-card {
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.phrase-card:hover {
+  border-color: #fbcfe8;
+  box-shadow: 0 2px 8px rgba(232, 90, 113, 0.08);
+  background: #fffdfd;
+}
+
+.phrase-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.phrase-term-group {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.phrase-japanese {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.phrase-reading {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.phrase-role-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #3b82f6;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.phrase-meaning {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.phrase-notes {
+  font-size: 11px;
+  color: #6b7280;
+  background: #f9fafb;
+  padding: 4px 8px;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  line-height: 1.4;
+}
+
+.phrase-notes-icon {
+  color: #e85a71;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+/* 底部状态 */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: #f9fafb;
+  border-top: 1px solid #f3f4f6;
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.model-tag {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+/* Loading 骨架动画 */
+.loading-box {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #6b7280;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid #fee2e6;
+  border-top-color: #e85a71;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.skeleton-line {
+  height: 12px;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 错误提示 */
+.error-box {
+  padding: 16px;
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 8px;
+  color: #b91c1c;
+  font-size: 12px;
+}
+
+.error-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}

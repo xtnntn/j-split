@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日文意群翻译设置</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo-area">
+        <span class="logo-icon">🌸</span>
+        <div>
+          <h2>J-Split 日文意群翻译</h2>
+          <p class="subtitle">AI 划词翻译 · 短语语法拆解</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- Base URL -->
+      <div class="form-group">
+        <label for="base-url">
+          接口地址 (Base URL)
+          <span class="help-tag" title="兼容 OpenAI 协议的接口前缀">OpenAI 兼容</span>
+        </label>
+        <input 
+          type="url" 
+          id="base-url" 
+          placeholder="https://tokendance.space/gateway/v1" 
+          value="https://tokendance.space/gateway/v1"
+          spellcheck="false"
+        >
+        <div class="quick-tags">
+          <span class="tag-btn" data-url="https://tokendance.space/gateway/v1">词元跳动 (tokendance)</span>
+          <span class="tag-btn" data-url="https://api.deepseek.com/v1">DeepSeek 官方</span>
+          <span class="tag-btn" data-url="https://api.openai.com/v1">OpenAI 官方</span>
+        </div>
+      </div>
+
+      <!-- API Key -->
+      <div class="form-group">
+        <label for="api-key">API 密钥 (API Key)</label>
+        <div class="input-with-action">
+          <input 
+            type="password" 
+            id="api-key" 
+            placeholder="输入你的 API Key (如 sk-...)" 
+            spellcheck="false"
+          >
+          <button type="button" id="toggle-key-visibility" class="icon-btn" title="查看/隐藏">👁️</button>
+        </div>
+        <div class="tip-text">
+          <span>未填写 Key 时可点击</span>
+          <a href="https://tokendance.space/keys" target="_blank" class="link-btn">去 tokendance 获取 Key ↗</a>
+        </div>
+      </div>
+
+      <!-- Model Selection -->
+      <div class="form-group">
+        <div class="label-row">
+          <label for="model-select">模型选择 (Model)</label>
+          <button type="button" id="fetch-models-btn" class="text-action-btn">
+            <span class="btn-icon">🔄</span> 检索平台模型
+          </button>
+        </div>
+        <div class="model-select-wrapper">
+          <select id="model-select">
+            <option value="">-- 请输入 Key 后点击上方“检索平台模型” --</option>
+          </select>
+        </div>
+        <div id="model-status" class="status-msg"></div>
+        <div class="manual-model-toggle">
+          <label class="checkbox-label">
+            <input type="checkbox" id="manual-model-checkbox">
+            <span>手动指定模型名称</span>
+          </label>
+          <input 
+            type="text" 
+            id="manual-model-input" 
+            placeholder="例如: deepseek-v3.2 或 qwen3-max" 
+            style="display: none; margin-top: 6px;"
+          >
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Trigger Mode -->
+      <div class="form-group">
+        <label>划词交互模式</label>
+        <div class="radio-options">
+          <label class="radio-label">
+            <input type="radio" name="trigger-mode" value="bubble" checked>
+            <div>
+              <strong>显示触发小气泡（推荐）</strong>
+              <p>划选文字后出现 🌸 图标，点击才翻译，防止看小说选中复制时频繁打扰。</p>
+            </div>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="trigger-mode" value="auto">
+            <div>
+              <strong>划选后自动翻译</strong>
+              <p>只要划选日文句子即立刻自动调用 AI 进行拆解并展开弹窗。</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions-group">
+        <button type="button" id="test-btn" class="btn btn-secondary">⚡ 测试配置</button>
+        <button type="button" id="save-btn" class="btn btn-primary">💾 保存配置</button>
+      </div>
+
+      <div id="global-status" class="global-status"></div>
+    </main>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
